@@ -1,29 +1,17 @@
 package com.aceba1.blackjack;
 
-import com.aceba1.util.Input;
+import com.aceba1.blackjack.card.Deck;
+import com.aceba1.blackjack.game.DealerGame;
+import com.aceba1.blackjack.game.Game;
+import com.aceba1.blackjack.hand.Hand;
 
 public class Main {
 
     public static void main(String[] args) {
-        //System.out.println("♠♤♥♡♣♧♦♢");
-	// write your code here
-        Deck deck = new Deck();
-
-        Hand hand = new Hand();
-
-        while (!deck.isEmpty()) {
-            hand.drawCard(deck, false);
-            System.out.println(hand);
-
-            // Testing only!
-            int rm;
-            do {
-                rm = Input.getNum("Remove? [-1, 0-" + hand.getSize() + "]: ", -1, hand.getSize());
-                if (rm != -1) deck.returnCard(hand.pullCard(rm));
-            } while (rm != -1);
+        Game game = new DealerGame();
+        while(true) {
+            System.out.println("\nBlackJack - New game (" + game.getClass().getSimpleName() + ")");
+            game.start();
         }
-
-//        while (!deck.isEmpty())
-//            System.out.println(deck.pullCard());
     }
 }

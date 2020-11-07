@@ -1,9 +1,6 @@
-package com.aceba1.blackjack;
-
-import com.sun.jdi.request.InvalidRequestStateException;
+package com.aceba1.blackjack.card;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 

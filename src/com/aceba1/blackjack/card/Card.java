@@ -1,4 +1,4 @@
-package com.aceba1.blackjack;
+package com.aceba1.blackjack.card;
 
 public class Card {
   public final byte value;
