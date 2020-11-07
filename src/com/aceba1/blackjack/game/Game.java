@@ -14,9 +14,10 @@ public abstract class Game {
   private void playHand(int index, Hand hand) {
     int cycle = 1;
     while (true) {
-      switch (hand.turn(cycle)) {
+      switch (hand.turn(cycle++)) {
 
         case 1: // HIT
+          System.out.println("HIT");
           hand.drawCard(deck, true);
           if (hand.isBust()) {
             System.out.println(hand.toStringAuth());
@@ -25,9 +26,11 @@ public abstract class Game {
           break;
 
         case 2: // STAND
+          System.out.println("STAND");
           return;
 
         case 3: // DOUBLE
+          System.out.println("DOUBLE");
           bets[index] *= 2; // Double the bet value
           hand.drawCard(deck, true); // Take a card
           if (hand.isBust())
@@ -35,6 +38,7 @@ public abstract class Game {
           return;
 
         case 4:
+          System.out.println("SPLIT");
           //TODO: Implement SPLIT!
           // Can insert to hands with index
           // Need a way to remove at end
