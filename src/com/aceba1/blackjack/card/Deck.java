@@ -46,13 +46,13 @@ public class Deck {
 
   public void initialize() {
     cards.clear();
-    // Gets Ace, Face, Queens and Kings
-    for (byte face = 1; face <= 12; face++) {
+    // Gets Ace, Face, Jack, Queens and Kings
+    for (byte face = 1; face <= 13; face++) {
       // Gets Clovers, Hearts, Spades and Stars
       for (byte type = 0; type < 4; type++) {
         cards.add(new Card(face, type));
       }
     }
-    // 48 cards total, no joker
+    // 52 cards total, no jokers
   }
 }

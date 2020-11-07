@@ -17,9 +17,10 @@ public class Card {
 
   public static String getFace(byte value) {
     if (value == 1) return "A ";
-    if (value == 11) return "Q ";
-    if (value == 12) return "K ";
-    // No joker. Probably would be 13
+    if (value == 11) return "J ";
+    if (value == 12) return "Q ";
+    if (value == 13) return "K ";
+    // No joker
 
     return String.format("%1$2s", value);
   }
@@ -27,7 +28,7 @@ public class Card {
   /**
    *
    * @param value The card's value, or representation, such as
-   *              1:A [1/11], Face [2-10] 11:Q [10], 12:K [10]
+   *              1:A [1/11], Face [2-10] 11:J [10], 12:Q [10] 13:K [10]
    * @param suit The symbol and color the card has, such as 0:Sp, 1:St, 2:Cl, 3:He. Not important to function
    */
   public Card(byte value, byte suit) {
@@ -48,6 +49,6 @@ public class Card {
 
   @Override
   public String toString() {
-    return show ? toStringAuth() : "[    ]";
+    return show ? toStringAuth() : "[ <> ]";
   }
 }
