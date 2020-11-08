@@ -4,10 +4,7 @@ import com.aceba1.blackjack.card.Deck;
 import com.aceba1.blackjack.card.RiggedDeck;
 import com.aceba1.blackjack.card.ShuffledDeck;
 import com.aceba1.blackjack.game.Game;
-import com.aceba1.blackjack.hand.AI;
-import com.aceba1.blackjack.hand.Dealer;
-import com.aceba1.blackjack.hand.Holder;
-import com.aceba1.blackjack.hand.Player;
+import com.aceba1.blackjack.hand.*;
 import com.aceba1.util.Input;
 
 import java.util.ArrayList;
@@ -154,10 +151,11 @@ public class Menu {
   static void addPlayer() {
     System.out.println("\nAdd Player!\n" +
       "- 1 : Player (Command Line)\n" +
-      "- 2 : Strategic AI\n" +
-      "- 3 : Dealer AI\n" +
+      "- 2 : Multi-Hand Player\n" +
+      "- 3 : Strategic AI\n" +
+      "- 4 : Dealer AI\n" +
       "- 0 : Back\n");
-    switch (Input.getNum("Choice: ", 0, 3)) {
+    switch (Input.getNum("Choice: ", 0, 4)) {
       case 1 -> {
         Player player = new Player(
           Input.getLine("Player Name: "),
@@ -167,11 +165,19 @@ public class Menu {
         System.out.println(player.getName() + " added!");
       }
       case 2 -> {
+        PlayerMultiHand player = new PlayerMultiHand(
+          Input.getLine("Player Name: "),
+          new Wallet()
+        );
+        playerList.add(playerList.size() - 1, player);
+        System.out.println(player.getName() + " added!");
+      }
+      case 3 -> {
         AI ai = new AI();
         playerList.add(playerList.size() - 1, ai);
         System.out.println(ai.getName() + " added!");
       }
-      case 3 -> {
+      case 4 -> {
         Dealer dealer = new Dealer(true);
         playerList.add(playerList.size() - 1, dealer);
         System.out.println(dealer.getName() + " added!");
