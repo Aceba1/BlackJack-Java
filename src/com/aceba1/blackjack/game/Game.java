@@ -70,7 +70,7 @@ public final class Game {
       Hand hand = holder.getHand(i);
       hand.drawCard(deck, true);
       hand.drawCard(deck, false);
-      System.out.println(holderIndex + " > " + holder.getName() + " - " + hand);
+      System.out.println((holderIndex + 1) + " > " + holder.getName() + " - " + hand);
     }
   }
 
@@ -83,7 +83,7 @@ public final class Game {
       Holder holder = holders.get(i);
       sleep(500);
 
-      System.out.println("\n" + i  + " > "+ holder.getName() + "'s turn!");
+      System.out.println("\n" + (i + 1) + " > "+ holder.getName() + "'s turn!");
 
       // This expands to the current
       for (int hand = 0; hand < holder.getHandCount(); hand++)
@@ -217,7 +217,7 @@ public final class Game {
 
         player.modifyFunds(payout(hand, dealer));
 
-        System.out.println(h + " > " + player.getName() + " - " + hand.toStringAuth() + "\n");
+        System.out.println((h + 1) + " > " + player.getName() + " - " + hand.toStringAuth() + "\n");
         hand.resetGameState();
         hand.returnAllCards(deck);
       }

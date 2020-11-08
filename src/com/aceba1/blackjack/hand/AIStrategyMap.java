@@ -20,6 +20,8 @@ public class AIStrategyMap {
       HARD_MAP);
     int c2 = dealerVisible - MAP_DEALER_START;
 
+    System.out.print("HARDMAP["+c1+"]["+c2+"]:\t");
+
     return HARD_MAP[c1][c2];
   }
 
@@ -29,6 +31,8 @@ public class AIStrategyMap {
       SOFT_MAP);
     int c2 = dealerVisible - MAP_DEALER_START;
 
+    System.out.print("SOFTMAP["+c1+"]["+c2+"]:\t");
+
     return SOFT_MAP[c1][c2];
   }
 
@@ -37,6 +41,8 @@ public class AIStrategyMap {
       PAIR_MAP_PLAYER_START,
       PAIR_MAP);
     int c2 = dealerVisible - MAP_DEALER_START;
+
+    System.out.print("PAIRMAP["+c1+"]["+c2+"]:\t");
 
     return PAIR_MAP[c1][c2];
   }

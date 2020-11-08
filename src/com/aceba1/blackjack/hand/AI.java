@@ -48,7 +48,7 @@ public class AI implements Holder {
   @Override
   public void bet() {
     hands.clear();
-    hands.add(new Hand(0));
+    hands.add(new Hand(100));
   }
 
   @Override

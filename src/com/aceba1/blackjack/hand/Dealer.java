@@ -1,8 +1,9 @@
 package com.aceba1.blackjack.hand;
 
 public class Dealer implements Holder { // Dealer always follows this predictable logic
-  final Hand hand = new Hand(0);
-  final boolean isDummy;
+
+  final Hand hand = new Hand(100); // Only one hand
+  final boolean isDummy; // Changes display name
 
   public Dealer(boolean dummy) {
     this.isDummy = dummy;
