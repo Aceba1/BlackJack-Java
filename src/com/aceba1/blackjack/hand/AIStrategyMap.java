@@ -6,27 +6,46 @@ public class AIStrategyMap {
   // A soft hand is with any ace cards
   // A pair is a hand with any 2 identical cards
 
+  // RESOURCE: https://wizardofodds.com/games/blackjack/strategy/1-deck/
+
+  private static int getStripIndex(int val, int start, byte[][] map) {
+    return Math.min(
+      Math.max(0, val - start),
+      map.length - 1);
+  }
+
   public static int getHardChoice(int playerValue, int dealerVisible) {
-    return HARD_MAP[
-      Math.min(
-        Math.max(0, playerValue - HARD_MAP_PLAYER_START),
-        HARD_MAP.length - 1)
-      ][dealerVisible - 2];
+    int c1 = getStripIndex(playerValue,
+      HARD_MAP_PLAYER_START,
+      HARD_MAP);
+    int c2 = dealerVisible - MAP_DEALER_START;
+
+    return HARD_MAP[c1][c2];
   }
+
   public static int getSoftChoice(int playerValue, int dealerVisible) {
-    return SOFT_MAP[
-      Math.min(
-        Math.max(0, playerValue - SOFT_MAP_PLAYER_START),
-        SOFT_MAP.length - 1)
-      ][dealerVisible - 2];
+    int c1 = getStripIndex(playerValue,
+      SOFT_MAP_PLAYER_START,
+      SOFT_MAP);
+    int c2 = dealerVisible - MAP_DEALER_START;
+
+    return SOFT_MAP[c1][c2];
   }
+
   public static int getPairChoice(int uniValue, int dealerVisible) {
-    return PAIR_MAP[Math.min(uniValue, 10)][dealerVisible - 2];
+    int c1 = getStripIndex(uniValue,
+      PAIR_MAP_PLAYER_START,
+      PAIR_MAP);
+    int c2 = dealerVisible - MAP_DEALER_START;
+
+    return PAIR_MAP[c1][c2];
   }
 
   private static final int
     HARD_MAP_PLAYER_START = 7,
-    SOFT_MAP_PLAYER_START = 13;
+    SOFT_MAP_PLAYER_START = 13,
+    PAIR_MAP_PLAYER_START = 1,
+    MAP_DEALER_START = 2;
 
   private static final byte[][]
     HARD_MAP = new byte[][] {
@@ -36,11 +55,11 @@ public class AIStrategyMap {
 /*10*/genStrip(3,8, 1,2),
 /*11*/genStrip(3,10),
 /*12*/genStrip(1,2, 2,3, 1,5),
-/*13*/genStrip(3,5, 1,5),
-/*14*/genStrip(3,5, 1,5),
-/*15*/genStrip(3,5, 1,5),
-/*16*/genStrip(3,5, 1,5),
-/*17*/genStrip(3,10)
+/*13*/genStrip(2,5, 1,5),
+/*14*/genStrip(2,5, 1,5),
+/*15*/genStrip(2,5, 1,5),
+/*16*/genStrip(2,5, 1,5),
+/*17*/genStrip(2,10)
     },
     SOFT_MAP = new byte[][] {
 /*13*/genStrip(1,2, 3,3, 1,5),
@@ -54,12 +73,12 @@ public class AIStrategyMap {
     },
     PAIR_MAP = new byte[][] {
 /*01*/genStrip(4,10),
-/*02*/genStrip(1,1, 4,5, 1,4),
-/*03*/genStrip(1,2, 4,4, 1,4),
-/*04*/genStrip(1,3, 3,2, 1,5),
+/*02*/genStrip(4,6, 1,4),
+/*03*/genStrip(4,7, 1,3),
+/*04*/genStrip(1,2, 4,3, 1,5),
 /*05*/genStrip(3,8, 1,2),
-/*06*/genStrip(4,5, 1,5),
-/*07*/genStrip(4,6, 1,2, 2,1, 1,1),
+/*06*/genStrip(4,6, 1,4),
+/*07*/genStrip(4,7, 1,1, 2,1, 1,1),
 /*08*/genStrip(4,10),
 /*09*/genStrip(4,5, 2,1, 4,2, 2,2),
 /*10*/genStrip(2,10),
