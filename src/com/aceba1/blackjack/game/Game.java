@@ -104,6 +104,7 @@ public final class Game {
 
     if (hand.getValue() == 21) {
       System.out.println("BLACKJACK");
+      hand.bet *= 2.5;
       return;
     }
 
