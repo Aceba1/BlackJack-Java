@@ -93,9 +93,8 @@ public class Menu {
       if (choice == 0) return;
       if (choice == count)
         addPlayer();
-        // Modify the player after their creation
-
-      modifyPlayer(choice - 1);
+      else
+        modifyPlayer(choice - 1);
 
       // No need to modify the game directly, as we have the player list in reference;
     }
