@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Menu {
   static Deck deckInUse = new ShuffledDeck();
-  static List<Holder> playerList = new ArrayList<>();
+  static final List<Holder> playerList = new ArrayList<>();
 
   static final Game game = new Game();
 
@@ -24,6 +24,7 @@ public class Menu {
     playerList.add(new Dealer(false));
     game.configure(deckInUse, playerList);
 
+    //noinspection StatementWithEmptyBody
     while (menu()) { /*loop*/ }
   }
 
@@ -137,15 +138,13 @@ public class Menu {
             System.out.println("Cannot have fewer than 2!");
           }
         }
-        case 4 -> {
+        case 4 -> { // Player cannot be null, as we limit the input above
           System.out.println(player.wallet);
           player.wallet.setFunds(
             Input.getNum("Set new funds [10-1000000000]: ", 10, 1_000_000_000)
           );
         }
-        case 5 -> {
-          player.name = Input.getLine("New Name: ");
-        }
+        case 5 -> player.name = Input.getLine("New Name: ");
         case 0 -> {
           return; // Also escape!
         }
@@ -156,8 +155,8 @@ public class Menu {
   static void addPlayer() {
     System.out.println("\nAdd Player!\n" +
       "- 1 : Player (Command Line)\n" +
-      "- 2 : Strategic AI (Matrix Ruleset)\n" +
-      "- 3 : Dealer AI (Dealer Ruleset)\n" +
+      "- 2 : Strategic AI\n" +
+      "- 3 : Dealer AI\n" +
       "- 0 : Back\n");
     switch (Input.getNum("Choice: ", 0, 3)) {
       case 1 -> {

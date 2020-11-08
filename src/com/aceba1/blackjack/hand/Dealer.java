@@ -1,11 +1,8 @@
 package com.aceba1.blackjack.hand;
 
-import javax.annotation.processing.SupportedOptions;
-import java.util.Iterator;
-
 public class Dealer implements Holder { // Dealer always follows this predictable logic
-  Hand hand = new Hand(0);
-  boolean isDummy;
+  final Hand hand = new Hand(0);
+  final boolean isDummy;
 
   public Dealer(boolean dummy) {
     this.isDummy = dummy;

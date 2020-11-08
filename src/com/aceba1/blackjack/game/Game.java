@@ -4,7 +4,6 @@ import com.aceba1.blackjack.card.Deck;
 import com.aceba1.blackjack.hand.Hand;
 import com.aceba1.blackjack.hand.Holder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //TODO: Refactor to solid class
@@ -59,8 +58,6 @@ public final class Game {
 
     for (var holder : holders)
       startHolder(holder);
-
-    getDealerHand().isBlackJack();
 
     sleep(1500);
 
@@ -204,8 +201,9 @@ public final class Game {
     int payout;
     String suffix;
     if (player.insuredCovered) {
-      payout = player.insuredCovered ? player.bet : 0;
+      payout = player.bet;
       suffix = " (insured)";
+      player.insuredCovered = false;
     } else {
       payout = 0;
       suffix = "";
@@ -228,6 +226,6 @@ public final class Game {
   public final void sleep(long millis) {
     try {
       Thread.sleep(millis);
-    } catch(Exception E) { }
+    } catch(Exception ignored) { }
   }
 }

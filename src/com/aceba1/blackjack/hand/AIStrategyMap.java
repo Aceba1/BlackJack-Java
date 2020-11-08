@@ -1,10 +1,6 @@
 package com.aceba1.blackjack.hand;
 
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class AIStrategyMap {
   // A hard hand is without any ace cards
   // A soft hand is with any ace cards

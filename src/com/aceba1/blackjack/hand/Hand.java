@@ -18,7 +18,7 @@ public final class Hand {
   // Unique to BlackJack
   private int aceCount = 0;
   private int topValue = 0;
-  public int bet = 0; // This will be used directly
+  public int bet; // This will be used directly
 
   public boolean insuredCovered; // Only for Insurance
 

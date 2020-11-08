@@ -10,8 +10,8 @@ public class ShuffledDeck implements Deck {
     return "Ever-Shuffled Deck";
   }
 
-  List<Card> cards = new ArrayList<>(52);
-  Random random = new Random();
+  final List<Card> cards = new ArrayList<>(52);
+  final Random random = new Random();
 
   public ShuffledDeck() {
     initialize();

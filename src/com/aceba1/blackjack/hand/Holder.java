@@ -1,8 +1,5 @@
 package com.aceba1.blackjack.hand;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public interface Holder{
 
   void modifyFunds(int amount);

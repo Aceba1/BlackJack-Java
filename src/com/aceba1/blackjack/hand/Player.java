@@ -11,7 +11,7 @@ public class Player implements Holder {
   public String name;
   public final Wallet wallet; // Cannot have any other wallet
 
-  List<Hand> hands = new ArrayList<>();
+  final List<Hand> hands = new ArrayList<>();
 
   public Player(String name, Wallet wallet) {
     this.name = name;

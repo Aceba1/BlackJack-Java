@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AI implements Holder {
-  List<Hand> hands = new ArrayList<>();
+  final List<Hand> hands = new ArrayList<>();
 
   @Override
   public void modifyFunds(int newFunds) {  }
