@@ -99,11 +99,19 @@ public final class Hand {
     return topValue == 21 && cards.size() == 2; // Can only be blackjack with an Ace and 10 card
   }
 
+  public boolean isSoft() {
+    return aceCount != 0;
+  }
+
   public boolean isBust() {
     return topValue - aceCount * 10 > 21;
   }
 
-  public boolean canSplit() {
+  public int peekFaceValue(int index) {
+    return cards.get(index).value;
+  }
+
+  public boolean canSplit() { //TODO: Check if rules allow splitting size over 2?
     return cards.size() == 2 &&
       cards.get(0).value == cards.get(1).value;
   }
