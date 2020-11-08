@@ -61,7 +61,7 @@ public class Player implements Holder {
       wallet.setFunds(50);
     }
     int bet = Input.getNum(name + " - Bet: ", 10, wallet.getFunds());
-    wallet.modifyFunds(bet);
+    wallet.modifyFunds(-bet);
 
     hands.clear();
     hands.add(new Hand(bet));
