@@ -41,7 +41,6 @@ public class Card {
     show = isUp;
   }
 
-  // Yes, this is public, but not necessarily 'exposed' in terms of safety
   // Primarily separated for use in hands to see what they have hidden
   public String toStringAuth() {
     return '[' + getFace(value) + ' ' + getSuit(suit) + ']';

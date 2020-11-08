@@ -7,7 +7,7 @@ public class Input {
 
   public static String getLine(String prompt) {
     System.out.print(prompt);
-    return in.nextLine().trim().toLowerCase();
+    return in.nextLine().trim();//.toLowerCase();
   }
 
   public static int getNum(String prompt, int minValue, int maxValue) {
