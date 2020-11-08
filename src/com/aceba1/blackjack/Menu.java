@@ -112,16 +112,17 @@ public class Menu {
           "- 4 : Set Wallet Funds (" + player.wallet.getFunds() + ")\n" +
           "- 5 : Set Display Name\n" : "") +
         "- 0 : Back\n");
+
       switch (Input.getNum("Choice: ", 0, playerFlag ? 5 : 3)) {
         case 1 -> {
           if (index > 0)
-            playerList.add(index - 1, playerList.remove(index--));
+            movePlayer(index, --index, holder);
           else
             System.out.println("Cannot move any higher!");
         }
         case 2 -> {
           if (index < playerList.size() - 2)
-            playerList.add(index + 1, playerList.remove(index++));
+            movePlayer(index, ++index, holder);
           else
             System.out.println("Cannot move below Dealer!");
         }
@@ -146,6 +147,11 @@ public class Menu {
         }
       }
     }
+  }
+
+  static void movePlayer(int from, int to, Holder player) {
+    playerList.set(from, playerList.get(to));
+    playerList.set(to, player);
   }
 
   static void addPlayer() {
