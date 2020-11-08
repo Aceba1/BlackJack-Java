@@ -99,7 +99,6 @@ public final class Game {
   }
 
   private void playHands(Holder holder, int handIndex) {
-    int cycle = 1;
     Hand hand = holder.getHand(handIndex);
 
     if (hand.getValue() == 21) {
@@ -121,54 +120,82 @@ public final class Game {
       }
     }
 
-    while (true) {
-      switch (holder.turn(hand, cycle++, dealerHand.getPublicValue())) {
-        // HIT
-        case 1 -> {
-          System.out.println("HIT");
-          hand.drawCard(deck, true);
+    // Will loop the hand's turn, modifying the cycle value as it goes
+    int cycle = 1;
+    while (cycle != -1)
+      cycle = handTurn(holder, hand, cycle);
+  }
 
-          if (!hand.isBust())
-            continue;
+  // Will return the new cycle number, or -1 to break
+  private int handTurn(Holder holder, Hand hand, int cycle) {
+    switch (holder.turn(hand, cycle, dealerHand.getPublicValue())) {
+      // HIT
+      case 1 -> {
+        return doHit(hand, cycle);
+      }
+      // STAY
+      case 2 -> {
+        return doStay();
+      }
+      // DOUBLE
+      case 3 -> {
+        return doDouble(holder, hand);
+      }
+      // SPLIT
+      case 4 -> {
+        return doSplit(holder, hand);
+      }
 
-          System.out.println(hand.toStringAuth()); //Bust
-          return;
-        }
-        // STAY
-        case 2 -> {
-          System.out.println("STAY");
-
-          return;
-        }
-        // DOUBLE
-        case 3 -> {
-          System.out.println("DOUBLE");
-          hand.bet *= 2; // Double the bet value
-          hand.drawCard(deck, true); // Take a card
-
-          if (hand.isBust())
-            System.out.println(hand.toStringAuth()); //Bust
-          else
-            holder.viewHand(hand);
-          return;
-        }
-        case 4 -> {
-          System.out.println("SPLIT");
-
-          Hand newHand = new Hand(hand.bet);
-          newHand.giveCard(hand.pullCard(hand.getSize() - 1));
-          holder.addHand(newHand);
-
-          // After splitting, each hand gets a new card
-          hand.drawCard(deck, true);
-          newHand.drawCard(deck, true);
-
-          // Do not return, replay this hand
-          // Allow for DOUBLE
-          cycle = 1;
-        }
+      default -> {
+        return cycle;
       }
     }
+  }
+
+  private int doHit(Hand hand, int cycle) {
+    System.out.println("HIT");
+    hand.drawCard(deck, true);
+
+    if (!hand.isBust())
+      return cycle + 1;
+
+    System.out.println(hand.toStringAuth()); //Bust
+    return -1; // Break
+  }
+
+  private int doStay() {
+    System.out.println("STAY");
+
+    return -1; // Break
+  }
+
+  private int doDouble(Holder holder, Hand hand) {
+    System.out.println("DOUBLE");
+    hand.bet *= 2; // Double the bet value
+    hand.drawCard(deck, true); // Take a card
+
+    if (hand.isBust())
+      System.out.println(hand.toStringAuth()); // Bust
+    else
+      holder.viewHand(hand);
+
+    return -1;  // Break
+  }
+
+  private int doSplit(Holder holder, Hand hand) {
+    System.out.println("SPLIT");
+
+    Hand newHand = new Hand(hand.bet);
+    newHand.giveCard(hand.pullCard(hand.getSize() - 1));
+    holder.addHand(newHand);
+
+    // After splitting, each hand gets a new card
+    hand.drawCard(deck, true);
+    newHand.drawCard(deck, true);
+
+    // Replay this hand
+    // Allow for DOUBLE
+    return 1;
   }
 
   private void finish() {
