@@ -29,7 +29,7 @@ public class Player implements Holder {
 
   @Override
   public int turn(Hand hand, int iterNum, int visibleDealerValue) {
-    boolean canDouble = iterNum == 1;
+    boolean canDouble = iterNum == 1 && wallet.canDeductAmount(hand.bet);
     boolean canSplit = hand.canSplit();
 
     System.out.println("Dealer - " + visibleDealerValue);
@@ -55,6 +55,11 @@ public class Player implements Holder {
 
   @Override
   public void bet() {
+    hands.clear();
+    hands.add(new Hand(getBet()));
+  }
+
+  protected int getBet() {
     System.out.println(wallet);
     if (wallet.getFunds() < 10) {
       System.out.println("Funds are too low! Resetting to 50");
@@ -63,8 +68,7 @@ public class Player implements Holder {
     int bet = Input.getNum(name + " - Bet: ", 10, wallet.getFunds());
     wallet.modifyFunds(-bet);
 
-    hands.clear();
-    hands.add(new Hand(bet));
+    return bet;
   }
 
   @Override

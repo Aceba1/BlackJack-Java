@@ -103,7 +103,11 @@ public final class Game {
 
     if (hand.getValue() == 21) {
       System.out.println("BLACKJACK");
-      hand.bet *= 1.25;
+
+      //hand.bet *= 1.25;
+      // Multiplying here is risky for data loss, so we set a boolean
+      hand.winByBlackjack = true;
+
       return;
     }
 
@@ -212,11 +216,13 @@ public final class Game {
         player.modifyFunds(payout(hand, dealer));
 
         System.out.println(h + " > " + player.getName() + " - " + hand.toStringAuth() + "\n");
+        hand.resetGameState();
         hand.returnAllCards(deck);
       }
     }
 
     System.out.println("Dealer - " + dealer.toStringAuth() + "\n");
+    dealer.resetGameState();
     dealer.returnAllCards(deck);
   }
 
@@ -232,27 +238,30 @@ public final class Game {
 
     int payout;
     String suffix;
+
     if (player.insuredCovered) {
       payout = player.bet;
       suffix = " (insured)";
-      player.insuredCovered = false;
     } else {
       payout = 0;
       suffix = "";
     }
 
+    // Returns
+    if (pValue == 0 || pValue < dValue) { // If the player busts, they lose no matter what
+      System.out.println("LOSE : " + payout + suffix);
+      return payout;
+    }
+    if (pValue == dValue && player.winByBlackjack == dealer.winByBlackjack) { // If it's a tie, or both win by BlackJack
+      payout += player.bet;
+      System.out.println("PUSH : " + payout + suffix);
+      return payout;
+    }
     if (pValue > dValue) {
-      payout += player.bet * 2;
+      payout += player.winByBlackjack ? (int)(player.bet * 2.5) : (player.bet * 2);
       System.out.println("WIN : " + payout + suffix);
       return payout;
     }
-    if (pValue == 0 || pValue < dValue) { // If the player busts, they lose no matter what!
-      System.out.println("LOSE : " + payout + suffix);
-      return 0;
-    }
-    payout += player.bet;
-    System.out.println("PUSH : " + payout + suffix);
-    return player.bet;
   }
 
   public final void sleep(long millis) {

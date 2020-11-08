@@ -19,7 +19,7 @@ public final class Hand {
   private int aceCount = 0;
   private int topValue = 0;
   public int bet; // This will be used directly
-
+  public boolean winByBlackjack; // Only for Blackjack
   public boolean insuredCovered; // Only for Insurance
 
   public int getSize() {
@@ -60,6 +60,11 @@ public final class Hand {
       aceCount++;
       topValue += 10;
     }
+  }
+
+  public void resetGameState() {
+    insuredCovered = false;
+    winByBlackjack = false;
   }
 
   public void returnAllCards(Deck deck) {
