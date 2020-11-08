@@ -59,7 +59,7 @@ public final class Game {
     for (var holder : holders)
       startHolder(holder);
 
-    sleep(1500);
+    sleep(1000);
 
     // Run the game!
     play();
@@ -89,12 +89,14 @@ public final class Game {
         playHands(holder, hand);
     }
 
-    sleep(750);
+    sleep(500);
     System.out.println("\nROUND FINISH!\n");
-    sleep(750);
+    sleep(1000);
 
     // End the game!
     finish();
+
+    sleep(1000); // Wait a little bit before returning to menu
   }
 
   private void playHands(Holder holder, int handIndex) {
@@ -151,15 +153,16 @@ public final class Game {
           return;
         }
         case 4 -> {
-          //TODO: Implement SPLIT!
-          // Can insert to hands with index
-          // Need a way to remove at end
           System.out.println("SPLIT");
 
           Hand newHand = new Hand(hand.bet);
           newHand.giveCard(hand.pullCard(hand.getSize() - 1));
-
           holder.addHand(newHand);
+
+          // After splitting, each hand gets a new card
+          hand.drawCard(deck, true);
+          newHand.drawCard(deck, true);
+
           // Do not return, replay this hand
           // Allow for DOUBLE
           cycle = 1;
