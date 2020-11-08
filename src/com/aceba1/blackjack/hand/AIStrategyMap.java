@@ -21,7 +21,7 @@ public class AIStrategyMap {
       ][dealerVisible - 2];
   }
   public static int getPairChoice(int uniValue, int dealerVisible) {
-    return PAIR_MAP[uniValue][dealerVisible - 2];
+    return PAIR_MAP[Math.min(uniValue, 10)][dealerVisible - 2];
   }
 
   private static final int
@@ -53,6 +53,7 @@ public class AIStrategyMap {
 /*20*/genStrip(2,10),
     },
     PAIR_MAP = new byte[][] {
+/*01*/genStrip(4,10),
 /*02*/genStrip(1,1, 4,5, 1,4),
 /*03*/genStrip(1,2, 4,4, 1,4),
 /*04*/genStrip(1,3, 3,2, 1,5),
@@ -62,7 +63,6 @@ public class AIStrategyMap {
 /*08*/genStrip(4,10),
 /*09*/genStrip(4,5, 2,1, 4,2, 2,2),
 /*10*/genStrip(2,10),
-/*11*/genStrip(4,10),
     };
 
   /**
