@@ -105,7 +105,10 @@ public final class Hand {
   }
 
   public boolean isSoft() {
-    return aceCount != 0;
+    return aceCount != 0 &&
+      (topValue - (aceCount * 10) >= 11);
+    // If the flat of the deck is equal to or less than 11, that means
+    // at least 1 ace is able to inflate and make the hand soft
   }
 
   public boolean isBust() {
