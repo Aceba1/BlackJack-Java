@@ -193,6 +193,7 @@ public final class Game {
   private int doSplit(Holder holder, Hand hand) {
     System.out.println("SPLIT");
 
+    holder.modifyFunds(-hand.bet);
     Hand newHand = new Hand(hand.bet);
     newHand.giveCard(hand.pullCard(hand.getSize() - 1));
     holder.addHand(newHand);

@@ -30,7 +30,7 @@ public class Player implements Holder {
   @Override
   public int turn(Hand hand, int iterNum, int visibleDealerValue) {
     boolean canDouble = iterNum == 1 && wallet.canDeductAmount(hand.bet);
-    boolean canSplit = hand.canSplit();
+    boolean canSplit = hand.canSplit() && wallet.canDeductAmount(hand.bet);
 
     System.out.println("Dealer - " + visibleDealerValue);
     System.out.println("You - " + hand.toStringAuth());
