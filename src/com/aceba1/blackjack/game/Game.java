@@ -10,6 +10,8 @@ import java.util.List;
 
 public final class Game {
 
+  public static final double BLACKJACK_PAYOUT_MULTIPLIER = 2.5;
+
   Deck deck;
 
   /** The dealer should be the last item in this array */
@@ -247,21 +249,31 @@ public final class Game {
       suffix = "";
     }
 
-    // Returns
-    if (pValue == 0 || pValue < dValue) { // If the player busts, they lose no matter what
+    // If the player gets 21 and the dealer gets BlackJack, dealer wins
+    // If the player and dealer get BlackJack, tie
+    // If the player busts, they lose no matter what
+
+    // Lose
+    if (pValue == 0 ||
+      pValue < dValue ||
+      (dealer.winByBlackjack && !player.winByBlackjack)
+    ) {
       System.out.println("LOSE : " + payout + suffix);
       return payout;
     }
-    if (pValue == dValue && player.winByBlackjack == dealer.winByBlackjack) { // If it's a tie, or both win by BlackJack
+    // Push
+    if (pValue == dValue &&
+      (player.winByBlackjack == dealer.winByBlackjack)
+    ) {
       payout += player.bet;
       System.out.println("PUSH : " + payout + suffix);
       return payout;
     }
-    if (pValue > dValue) {
-      payout += player.winByBlackjack ? (int)(player.bet * 2.5) : (player.bet * 2);
-      System.out.println("WIN : " + payout + suffix);
-      return payout;
-    }
+    // Win
+    payout += player.winByBlackjack ?
+      (int)(player.bet * BLACKJACK_PAYOUT_MULTIPLIER) : (player.bet * 2);
+    System.out.println("WIN : " + payout + suffix);
+    return payout;
   }
 
   public final void sleep(long millis) {

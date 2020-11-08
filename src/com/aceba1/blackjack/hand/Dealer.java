@@ -13,7 +13,7 @@ public class Dealer implements Holder { // Dealer always follows this predictabl
 
   @Override
   public int turn(Hand hand, int iterNum, int publicDealerHand) {
-    if (hand.getValue() > 17)
+    if (hand.getValue() >= 17)
       return 2; // Stand on 17 and up
     return 1; // Hit on 16 and down
   }
