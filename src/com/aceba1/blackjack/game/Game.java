@@ -103,15 +103,7 @@ public final class Game {
   private void playHands(Holder holder, int handIndex) {
     Hand hand = holder.getHand(handIndex);
 
-    if (hand.getValue() == 21) {
-      System.out.println("BLACKJACK");
-
-      //hand.bet *= 1.25;
-      // Multiplying here is risky for data loss, so we set a boolean
-      hand.winByBlackjack = true;
-
-      return;
-    }
+    if (testBlackJack(hand)) return;
 
     if (hand != dealerHand && dealerHand.getPublicValue() == 11) {
       holder.viewHand(hand);
@@ -130,6 +122,19 @@ public final class Game {
     int cycle = 1;
     while (cycle != -1)
       cycle = handTurn(holder, hand, cycle);
+  }
+
+  private boolean testBlackJack(Hand hand) {
+    if (hand.getValue() == 21) {
+      System.out.println("BLACKJACK");
+
+      //hand.bet *= 1.25;
+      // Multiplying here is risky for data loss, so we set a boolean
+      hand.winByBlackjack = true;
+
+      return true;
+    }
+    return false;
   }
 
   // Will return the new cycle number, or -1 to break
@@ -202,9 +207,9 @@ public final class Game {
     hand.drawCard(deck, true);
     newHand.drawCard(deck, true);
 
-    // Replay this hand
-    // Allow for DOUBLE
-    return 1;
+    // Replay this hand, if not blackjack
+    // Set to 1 = Allow for DOUBLE
+    return testBlackJack(hand) ? -1 : 1;
   }
 
   private void finish() {
