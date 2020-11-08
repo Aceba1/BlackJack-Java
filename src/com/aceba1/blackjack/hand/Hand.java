@@ -113,6 +113,6 @@ public final class Hand {
 
   public boolean canSplit() { //TODO: Check if rules allow splitting size over 2?
     return cards.size() == 2 &&
-      cards.get(0).value == cards.get(1).value;
+      Math.min(cards.get(0).value, 10) == Math.min(cards.get(1).value, 10);
   }
 }

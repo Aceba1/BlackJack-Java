@@ -103,7 +103,7 @@ public final class Game {
 
     if (hand.getValue() == 21) {
       System.out.println("BLACKJACK");
-      hand.bet *= 2.5;
+      hand.bet *= 1.25;
       return;
     }
 
@@ -171,6 +171,8 @@ public final class Game {
 
   private int doDouble(Holder holder, Hand hand) {
     System.out.println("DOUBLE");
+
+    holder.modifyFunds(-hand.bet); // Deduct funds
     hand.bet *= 2; // Double the bet value
     hand.drawCard(deck, true); // Take a card
 
