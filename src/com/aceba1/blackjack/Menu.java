@@ -60,7 +60,7 @@ public class Menu {
   }
 
   static void setDeckType() {
-    System.out.println("\nSet Deck! Current:" + deckInUse.getName() + "\n" +
+    System.out.println("\nSet Deck! Current: " + deckInUse.getName() + "\n" +
       "- 1 : Shuffled Draw\n" +
       "- 2 : Select Draw (DEBUG)\n" +
       "- 0 : Back\n");
