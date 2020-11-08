@@ -5,6 +5,14 @@ import java.util.List;
 import java.util.Random;
 
 public class ShuffledDeck implements Deck {
+
+  private static final int
+    CARDS_FACE_START = 1, // ACE ...
+    CARDS_FACE_END = 13,  // ... KING (No JOKER:14)
+    CARDS_SUIT_START = 0, // CLOVER ...
+    CARDS_SUIT_END = 3;   // ... STAR
+  // 52 cards total (no jokers)
+
   @Override
   public String getName() {
     return "Ever-Shuffled Deck";
@@ -51,13 +59,13 @@ public class ShuffledDeck implements Deck {
 
   public void initialize() {
     cards.clear();
-    // Gets Ace, Face, Jack, Queens and Kings
-    for (byte face = 1; face <= 13; face++) {
-      // Gets Clovers, Hearts, Spades and Stars
-      for (byte type = 0; type < 4; type++) {
+
+    // Gets face variants
+    for (byte face = CARDS_FACE_START; face <= CARDS_FACE_END; face++) {
+      // Gets suit variants
+      for (byte type = CARDS_SUIT_START; type < CARDS_SUIT_END; type++) {
         cards.add(new Card(face, type));
       }
     }
-    // 52 cards total, no jokers
   }
 }
