@@ -32,7 +32,7 @@ public class Menu {
     System.out.println("\nMenu!\n" +
       "- 1 : Play\n" +
       "- 2 : Configure\n" +
-      "- 0 : Quit");
+      "- 0 : Quit\n");
     switch (Input.getNum("Choice: ", 0, 2)) {
       case 1 -> game.start();
       case 2 -> configure();
@@ -81,11 +81,11 @@ public class Menu {
 
       int count = 0;
       while (count < playerList.size() - 1)
-        System.out.println("- " + (count + 1) + " " +
+        System.out.println((count + 1) + " > " +
           playerList.get(count++).getName());
 
       System.out.println("- " + (++count) + " : New Player\n" +
-        "- 0 : Back");
+        "- 0 : Back\n");
 
       // Cannot use a switch case for this!
       int choice = Input.getNum("Choice: ", 0, count);
@@ -134,7 +134,7 @@ public class Menu {
             System.out.println("Instance Destroyed...");
             return; // Escape!
           } else {
-            System.out.println("Cannot have fewer than 2!");
+            System.out.println("Must have at least 1!");
           }
         }
         case 4 -> { // Player cannot be null, as we limit the input above

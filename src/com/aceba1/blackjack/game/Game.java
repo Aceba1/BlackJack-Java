@@ -23,9 +23,7 @@ public final class Game {
       .getHand(0);
   }
 
-  public Game() {
-
-  }
+  public Game() { }
 
   public Game(Deck deck, List<Holder> holders) {
     configure(deck, holders);
@@ -56,8 +54,8 @@ public final class Game {
 
     System.out.println("\nPASSING CARDS...\n");
 
-    for (var holder : holders)
-      startHolder(holder);
+    for (int h = 0; h < holders.size(); h++)
+      startHolder(h, holders.get(h));
 
     sleep(1000);
 
@@ -65,12 +63,12 @@ public final class Game {
     play();
   }
 
-  private void startHolder(Holder holder) {
+  private void startHolder(int holderIndex, Holder holder) {
     for (int i = 0; i < holder.getHandCount(); i++) {
       Hand hand = holder.getHand(i);
       hand.drawCard(deck, true);
       hand.drawCard(deck, false);
-      System.out.println(holder.getName() + " - " + hand);
+      System.out.println(holderIndex + " > " + holder.getName() + " - " + hand);
     }
   }
 
@@ -79,10 +77,11 @@ public final class Game {
     System.out.println("\nROUND START!");
 
     // Go through all the players and their hands
-    for (Holder holder : holders) {
-      sleep(750);
+    for (int i = 0; i < holders.size(); i++) {
+      Holder holder = holders.get(i);
+      sleep(500);
 
-      System.out.println("\n" + holder.getName() + "'s turn!");
+      System.out.println("\n" + i  + " > "+ holder.getName() + "'s turn!");
 
       // This expands to the current
       for (int hand = 0; hand < holder.getHandCount(); hand++)
@@ -182,7 +181,7 @@ public final class Game {
 
         player.modifyFunds(payout(hand, dealer));
 
-        System.out.println(player.getName() + " - " + hand.toStringAuth() + "\n");
+        System.out.println(h + " > " + player.getName() + " - " + hand.toStringAuth() + "\n");
         hand.returnAllCards(deck);
       }
     }
