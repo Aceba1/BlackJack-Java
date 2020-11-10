@@ -16,20 +16,21 @@ public class Card {
   }
 
   public static String getFace(byte value) {
-    if (value == 1) return "A ";
-    if (value == 11) return "J ";
-    if (value == 12) return "Q ";
-    if (value == 13) return "K ";
-    // No joker
-
-    return String.format("%1$2s", value);
+    return switch (value) {
+      case 1 -> "A ";
+      case 11 -> "J ";
+      case 12 -> "Q ";
+      case 13 -> "K ";
+      case 14 -> "JK";
+      default -> String.format("%1$2s", value);
+    };
   }
 
   /**
    *
    * @param value The card's value, or representation, such as
-   *              1:A [1/11], Face [2-10] 11:J [10], 12:Q [10] 13:K [10]
-   * @param suit The symbol and color the card has, such as 0:Sp, 1:St, 2:Cl, 3:He. Not important to function
+   *              1:A, [2-10]:Face, 11:J, 12:Q, 13:K, 14:JK
+   * @param suit The symbol and color the card has, such as 0:Sp, 1:St, 2:Cl, 3:He, 4:?(Joker)
    */
   public Card(byte value, byte suit) {
     this.value = value;
