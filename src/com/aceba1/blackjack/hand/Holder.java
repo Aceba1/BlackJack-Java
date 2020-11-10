@@ -38,8 +38,7 @@ public interface Holder{
   void bet();
 
   /**
-   *
-   * @return Unique name of
+   * @return Unique name of Holder
    */
   String getName();
 

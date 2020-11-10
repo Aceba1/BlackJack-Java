@@ -2,9 +2,9 @@ package com.aceba1.blackjack.hand;
 
 
 public class AIStrategyMap {
-  // A hard hand is without any ace cards
-  // A soft hand is with any ace cards
-  // A pair is a hand with any 2 identical cards
+  // A hard hand is without any inflated ace cards
+  // A soft hand is with any inflated ace cards
+  // A pair is a hand with any 2 identical (value) cards
 
   // RESOURCE: https://wizardofodds.com/games/blackjack/strategy/1-deck/
 

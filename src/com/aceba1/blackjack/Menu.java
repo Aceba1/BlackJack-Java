@@ -102,6 +102,7 @@ public class Menu {
 
     boolean playerFlag = holder instanceof Player;
     Player player = playerFlag ? (Player) holder : null;
+
     while (true) {
       System.out.println("\nModifying " + (index + 1) + " - " + holder.getName() +
         " (" + holder.getClass().getSimpleName() + "):\n" +
@@ -161,33 +162,23 @@ public class Menu {
       "- 3 : Strategic AI\n" +
       "- 4 : Dealer AI\n" +
       "- 0 : Back\n");
+
     switch (Input.getNum("Choice: ", 0, 4)) {
-      case 1 -> {
-        Player player = new Player(
+      case 1 -> addPlayer(new Player(
           Input.getLine("Player Name: "),
           new Wallet()
-        );
-        playerList.add(playerList.size() - 1, player);
-        System.out.println(player.getName() + " added!");
-      }
-      case 2 -> {
-        PlayerMultiHand player = new PlayerMultiHand(
+        ));
+      case 2 -> addPlayer(new PlayerMultiHand(
           Input.getLine("Player Name: "),
           new Wallet()
-        );
-        playerList.add(playerList.size() - 1, player);
-        System.out.println(player.getName() + " added!");
-      }
-      case 3 -> {
-        AI ai = new AI();
-        playerList.add(playerList.size() - 1, ai);
-        System.out.println(ai.getName() + " added!");
-      }
-      case 4 -> {
-        Dealer dealer = new Dealer(true);
-        playerList.add(playerList.size() - 1, dealer);
-        System.out.println(dealer.getName() + " added!");
-      }
+        ));
+      case 3 -> addPlayer(new AI());
+      case 4 -> addPlayer(new Dealer(true));
     }
+  }
+
+  static void addPlayer(Holder player) {
+    playerList.add(playerList.size() - 1, player);
+    System.out.println(player.getName() + " added!");
   }
 }

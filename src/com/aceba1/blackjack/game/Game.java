@@ -6,8 +6,6 @@ import com.aceba1.blackjack.hand.Holder;
 
 import java.util.List;
 
-//TODO: Refactor to solid class
-
 public final class Game {
 
   public static final double BLACKJACK_PAYOUT_MULTIPLIER = 2.5;
@@ -139,28 +137,18 @@ public final class Game {
 
   // Will return the new cycle number, or -1 to break
   private int handTurn(Holder holder, Hand hand, int cycle) {
-    switch (holder.turn(hand, cycle, dealerHand.getPublicValue())) {
+    return switch (holder.turn(hand, cycle, dealerHand.getPublicValue())) {
       // HIT
-      case 1 -> {
-        return doHit(hand, cycle);
-      }
+      case 1 -> doHit(hand, cycle);
       // STAY
-      case 2 -> {
-        return doStay();
-      }
+      case 2 -> doStay();
       // DOUBLE
-      case 3 -> {
-        return doDouble(holder, hand);
-      }
+      case 3 -> doDouble(holder, hand);
       // SPLIT
-      case 4 -> {
-        return doSplit(holder, hand);
-      }
-
-      default -> {
-        return cycle;
-      }
-    }
+      case 4 -> doSplit(holder, hand);
+      // Did the interface hiccup?
+      default -> cycle;
+    };
   }
 
   private int doHit(Hand hand, int cycle) {
@@ -170,7 +158,7 @@ public final class Game {
     if (!hand.isBust())
       return cycle + 1;
 
-    System.out.println(hand.toStringAuth()); //Bust
+    System.out.println(hand.toStringAuth()); // Bust
     return -1; // Break
   }
 

@@ -36,7 +36,7 @@ public class AI implements Holder {
 
     int value = hand.getValue();
 
-    if (hand.isSoft()) // Has any act card
+    if (hand.isSoft()) // Has any inflated ace card
       return AIStrategyMap.getSoftChoice(value, dealerVisible);
     else
       return AIStrategyMap.getHardChoice(value, dealerVisible);

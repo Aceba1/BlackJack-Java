@@ -25,14 +25,7 @@ public class Dealer implements Holder { // Dealer always follows this predictabl
   }
 
   @Override
-  public void bet() {
-    // Already initialized
-  }
-
-  @Override
-  public Hand getHand(int none) {
-    return hand;
-  }
+  public void bet() { } // Already initialized
 
   @Override
   public void modifyFunds(int newFunds) { }
@@ -43,10 +36,15 @@ public class Dealer implements Holder { // Dealer always follows this predictabl
   }
 
   @Override
+  public Hand getHand(int none) {
+    return hand;
+  }
+
+  @Override
   public void addHand(Hand newHand) { }
 
   @Override
   public boolean insurance(Hand hand) {
-    return false; // what why would you insure against yourself
+    return false;
   }
 }
