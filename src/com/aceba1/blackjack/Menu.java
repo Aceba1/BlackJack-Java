@@ -101,7 +101,9 @@ public class Menu {
     Holder holder = playerList.get(index);
 
     boolean playerFlag = holder instanceof Player;
-    Player player = playerFlag ? (Player) holder : null;
+    boolean playerMultiFlag = playerFlag && holder instanceof PlayerMultiHand;
+    var player = playerFlag ? (Player) holder : null;
+    var playerMulti = playerMultiFlag ? (PlayerMultiHand) holder : null;
 
     while (true) {
       System.out.println("\nModifying " + (index + 1) + " - " + holder.getName() +
@@ -112,9 +114,13 @@ public class Menu {
         (playerFlag ?
           "- 4 : Set Wallet Funds (" + player.wallet.getFunds() + ")\n" +
           "- 5 : Set Display Name\n" : "") +
+        (playerMultiFlag ?
+          "- 6 : Set maximum hands (" + playerMulti.maxHands + ")\n" : "") +
         "- 0 : Back\n");
 
-      switch (Input.getNum("Choice: ", 0, playerFlag ? 5 : 3)) {
+      switch (Input.getNum("Choice: ", 0,
+        playerFlag ? (playerMultiFlag ? 6 : 5) : 3)
+      ) {
         case 1 -> {
           if (index > 0)
             movePlayer(index, --index, holder);
@@ -143,6 +149,7 @@ public class Menu {
           );
         }
         case 5 -> player.name = Input.getLine("New Name: ");
+        case 6 -> playerMulti.maxHands = Input.getNum("Max hands [2-20]: ", 2, 20);
         case 0 -> {
           return; // Also escape!
         }
@@ -170,7 +177,8 @@ public class Menu {
         ));
       case 2 -> addPlayer(new PlayerMultiHand(
           Input.getLine("Player Name: "),
-          new Wallet()
+          new Wallet(),
+          Input.getNum("Max hands [2-20]: ", 2, 20)
         ));
       case 3 -> addPlayer(new AI());
       case 4 -> addPlayer(new Dealer(true));
