@@ -10,6 +10,8 @@ public class PlayerMultiHand extends Player {
 
   @Override
   public void bet() {
+    hands.clear();
+
     System.out.print(name + " - ");
     int count = Input.getNum("Number of Hands [1-3]: ", 1, 3);
 
