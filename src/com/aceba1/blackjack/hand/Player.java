@@ -32,7 +32,7 @@ public class Player implements Holder {
     boolean canDouble = iterNum == 1 && wallet.canDeductAmount(hand.bet);
     boolean canSplit = hand.canSplit() && wallet.canDeductAmount(hand.bet);
 
-    System.out.println("Dealer - " + visibleDealerValue);
+    System.out.println("\nDealer - " + visibleDealerValue);
     System.out.println("You - " + hand.toStringAuth());
     System.out.print("\nOptions:\n" +
       "- 1 : HIT\n" +
